@@ -1,7 +1,11 @@
 <?php
+//0. SESSION開始！！
+session_start();
+
 include("funcs.php");
 
 //1.  DB接続します
+sschk();
 $pdo = db_conn();
 
 //２．データ取得SQL作成
@@ -17,16 +21,21 @@ if($status==false) {
 }else{
   //Selectデータの数だけ自動でループしてくれる
   //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
+  if ($_SESSION["kanri_flg"] !=1){
   while( $res = $stmt->fetch(PDO::FETCH_ASSOC)){
     $view .= '<a href="detail.php?id='.h($res["id"]).'">';
     $view .= h($res["id"]).", ".h($res["name"]).", ".h($res["url"]).", ".h($res["naiyou"]);
     $view .= "</a>";
-    $view .= '<a href="delete.php?id='.h($res["id"]).'">';
-    $view .= "[削除]<br>";
-    $view .= '</a>';
-  }
-
-}
+    $view .= '<br>';
+  }}else{
+    while( $res = $stmt->fetch(PDO::FETCH_ASSOC)){
+      $view .= '<a href="detail.php?id='.h($res["id"]).'">';
+      $view .= h($res["id"]).", ".h($res["name"]).", ".h($res["url"]).", ".h($res["naiyou"]);
+      $view .= "</a>";
+      $view .= '<a href="delete.php?id='.h($res["id"]).'">';
+      $view .= "[削除]<br>";
+      $view .= '</a>';
+}}}
 ?>
 
 

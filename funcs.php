@@ -39,6 +39,16 @@ function redirect($file_name){
     exit();
 }
 
+//SessionCheck(スケルトン)
+function sschk(){
+    if($_SESSION["chk_ssid"]!=session_id()){
+      exit("Login Error");
+    }else{
+      session_regenerate_id(true);
+      $_SESSION["chk_ssid"]=session_id();
+    }
+    }
+
 
 
 

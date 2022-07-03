@@ -1,4 +1,7 @@
 <?php
+//0. SESSION開始！！
+session_start();
+
 //1. POSTデータ取得
 //$name = filter_input( INPUT_GET, ","name" ); //こういうのもあるよ
 //$email = filter_input( INPUT_POST, "email" ); //こういうのもあるよ
@@ -9,6 +12,7 @@ $naiyou = $_POST['naiyou'];
 
 //2. DB接続します
 include("funcs.php");
+sschk();
 $pdo = db_conn();
 
 //３．データ登録SQL作成
